@@ -16,12 +16,12 @@
 //         axios.post('http://localhost:5000/api/auth/login', login)
 //             .then(res => {
 //             console.log(res.data);
-//             localStorage.setItem('token', res.data.token);
-//             localStorage.setItem('username', res.data.info.username)
-//             localStorage.setItem('email', res.data.info.email)
-//             localStorage.setItem('name', res.data.info.name)
-//             localStorage.setItem('userID',res.data.info._id)
-//             localStorage.setItem('pic',res.data.info.pic)
+//             sessionStorage.setItem('token', res.data.token);
+//             sessionStorage.setItem('username', res.data.info.username)
+//             sessionStorage.setItem('email', res.data.info.email)
+//             sessionStorage.setItem('name', res.data.info.name)
+//             sessionStorage.setItem('userID',res.data.info._id)
+//             sessionStorage.setItem('pic',res.data.info.pic)
 //             const currentUser = res.data.info;
 //             console.log("currentUser: ",currentUser)
 //             navigate("/home");})
@@ -66,7 +66,7 @@ export default function Login() {
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const [login, setLogin] = useState({ email: '', password: '' });
-  localStorage.clear();
+  sessionStorage.clear();
   const changeHandler = (e) => {
     setLogin({ ...login, [e.target.name]: e.target.value });
   };
@@ -77,12 +77,13 @@ export default function Login() {
     axios.post('https://backend-tweetify.onrender.com/api/auth/login',login)
       .then(res => {
         // console.log(res.data);
-        localStorage.setItem('token', res.data.token);
-        localStorage.setItem('username', res.data.info.username);
-        localStorage.setItem('email', res.data.info.email);
-        localStorage.setItem('name', res.data.info.name);
-        localStorage.setItem('userID', res.data.info._id);
-        localStorage.setItem('pic', res.data.info.pic);
+        sessionStorage.setItem('token', res.data.token);
+        sessionStorage.setItem('username', res.data.info.username);
+        sessionStorage.setItem('name', res.data.info.name)
+        sessionStorage.setItem('email', res.data.info.email);
+        sessionStorage.setItem('name', res.data.info.name);
+        sessionStorage.setItem('userID', res.data.info._id);
+        sessionStorage.setItem('pic', res.data.info.pic);
         navigate("/home");
       })
       .catch(err => {
@@ -92,7 +93,7 @@ export default function Login() {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      localStorage.clear();
+      sessionStorage.clear();
       navigate("/login");
     }, 60000); // 1 minute in milliseconds
 

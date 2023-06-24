@@ -59,7 +59,7 @@ export default function Main() {
   
   return (
     <div id="main">
-    {localStorage.getItem('token')?
+    {sessionStorage.getItem('token')?
     <div className='homep'>
       <Navleft/>
       {/* <Navmid info={temp}/> */}

@@ -7,7 +7,7 @@ export default function Navleft() {
 
     function logouthandler()
     {
-        localStorage.clear();
+        sessionStorage.clear();
         window.location = "/"
         alert("logged out")
     }
@@ -36,7 +36,7 @@ export default function Navleft() {
                 <svg viewBox="0 0 24 24" aria-hidden="true"><g><path d="M19.993 9.042C19.48 5.017 16.054 2 11.996 2s-7.49 3.021-7.999 7.051L2.866 18H7.1c.463 2.282 2.481 4 4.9 4s4.437-1.718 4.9-4h4.236l-1.143-8.958zM12 20c-1.306 0-2.417-.835-2.829-2h5.658c-.412 1.165-1.523 2-2.829 2zm-6.866-4l.847-6.698C6.364 6.272 8.941 4 11.996 4s5.627 2.268 6.013 5.295L18.864 16H5.134z"></path></g></svg>                    
                 <span>Notifications</span>
                 </div> */}
-                <Link to={`/profile/${localStorage.getItem('userID')}`}>
+                <Link to={`/profile/${sessionStorage.getItem('userID')}`}>
                 <div id="one">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><g><path d="M5.651 19h12.698c-.337-1.8-1.023-3.21-1.945-4.19C15.318 13.65 13.838 13 12 13s-3.317.65-4.404 1.81c-.922.98-1.608 2.39-1.945 4.19zm.486-5.56C7.627 11.85 9.648 11 12 11s4.373.85 5.863 2.44c1.477 1.58 2.366 3.8 2.632 6.46l.11 1.1H3.395l.11-1.1c.266-2.66 1.155-4.88 2.632-6.46zM12 4c-1.105 0-2 .9-2 2s.895 2 2 2 2-.9 2-2-.895-2-2-2zM8 6c0-2.21 1.791-4 4-4s4 1.79 4 4-1.791 4-4 4-4-1.79-4-4z"></path></g></svg>
                 <span>Profile</span>
@@ -48,11 +48,11 @@ export default function Navleft() {
         </div>
         <div id="userbox">
                     <div id="logprof"> 
-                    <img id="profile_pic" src={localStorage.getItem('pic')} alt="profile"></img>
+                    <img id="profile_pic" src={sessionStorage.getItem('pic')} alt="profile"></img>
                     <div>
-                    <p>{localStorage.getItem('name')}</p>
+                    <p>{sessionStorage.getItem('name')}</p>
                     {/* {name}</p> */}
-                    <p>{localStorage.getItem('username')}</p>
+                    <p>{sessionStorage.getItem('username')}</p>
                     {/* {username}</p> */}
                     </div>
                     </div>

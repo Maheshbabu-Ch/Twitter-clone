@@ -7,19 +7,24 @@ export default function Navmid(){
   useEffect(()=>{getTweets();},[])
   const post_tweet = async () => {
     const tweetText = document.getElementById("tweet_content").innerText;
+    const tweetButton = document.getElementById("tweet");
+    document.getElementById("tweet_content").innerText = "";
+
+    tweetButton.disabled = true;
     if (tweetText.trim().length === 0)
       return;
     try {
-      // const response = await axios.post("http://localhost:5000/api/tweets/", { content: tweetText, userID: localStorage.getItem('userID') }, {
-      await axios.post("https://backend-tweetify.onrender.com/api/tweets",{ content: tweetText, userID: localStorage.getItem('userID')},{
+      // const response = await axios.post("http://localhost:5000/api/tweets/", { content: tweetText, userID: sessionStorage.getItem('userID') }, {
+      await axios.post("https://backend-tweetify.onrender.com/api/tweets",{ content: tweetText, userID: sessionStorage.getItem('userID')},{
         headers: {
-          'x-token': localStorage.getItem('token')
+          'x-token': sessionStorage.getItem('token')
         }
       });
       getTweets();
-      document.getElementById("tweet_content").innerText = "";
     } catch (error) {
       console.error(error);
+    } finally {
+      tweetButton.disabled = false;
     }
   };
 
@@ -33,7 +38,7 @@ export default function Navmid(){
   //     catch(err){console.log(err);}
   //   };
   //   fetchData();
-  // },[localStorage.getItem('userID')]);
+  // },[sessionStorage.getItem('userID')]);
 
 const getTweets = async () => {
   try {
@@ -69,7 +74,7 @@ const getTweets = async () => {
         <div id="post">
             <form id="postform" onSubmit={event => event.preventDefault()}>
                 <div id="post_user">
-                  <img id="profile_pic"src={localStorage.getItem('pic')}></img>
+                  <img id="profile_pic"src={sessionStorage.getItem('pic')}></img>
                   <div id="tweet_content"data-text="What is happening?!" contentEditable='true'></div>
 
                 </div>

@@ -11,6 +11,7 @@ export default function Signup() {
   }
   const submitHandler = (e) => {
       e.preventDefault();
+      
       axios.post(`https://backend-tweetify.onrender.com/api/auth/register`, register).then(res => { alert(res.data); navigate('/login') }).catch(err => alert(err.response.data));
   }
 
@@ -32,11 +33,11 @@ export default function Signup() {
             </tr>
           <tr>
             <td>Email</td>
-            <td><input name="email" type='text' placeholder='Enter your Email' onChange={changeHandler} required/></td>
+            <td><input name="email" type='email' placeholder='Enter your Email' onChange={changeHandler} required/></td>
           </tr>
           <tr>
             <td>Password</td>
-            <td><input name="password" type='password' placeholder='Enter your Password' onChange={changeHandler} required/></td>
+            <td><input name="password" type='password' placeholder='Enter your Password' onChange={changeHandler} title='' required/></td>
           </tr>
         </table>
         <div>
