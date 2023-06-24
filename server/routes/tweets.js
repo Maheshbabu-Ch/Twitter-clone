@@ -39,7 +39,7 @@ const like = async (req, res, next) => {
         }
         else{
             await tweet.updateOne({$pull : {likes:req.body.id}})
-            return res.status(200).json("Disiked the tweet")
+            return res.status(900).json("Disiked the tweet")
         }
 
     }catch(err){ next(err); }

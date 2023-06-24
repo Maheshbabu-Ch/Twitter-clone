@@ -60,7 +60,7 @@ import React, { useState, useEffect } from 'react';
 import "./Style.css";
 import Nav from "./Navigation";
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -73,7 +73,8 @@ export default function Login() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/auth/login', login)
+    // axios.post('http://localhost:5000/api/auth/login', login)
+    axios.post('https://backend-tweetify.onrender.com/api/auth/login',login)
       .then(res => {
         // console.log(res.data);
         localStorage.setItem('token', res.data.token);
@@ -100,8 +101,9 @@ export default function Login() {
 
 
   return (
-    <div>
+    <div id="loginpage">
       <Nav />
+      <div className="container">
       <div id='loginform'>
         <h2>Sign-In</h2>
         {error && <p id="center">{error}</p>}
@@ -119,10 +121,13 @@ export default function Login() {
             </tbody>
           </table>
           <div>
-            <p><input type='submit' value="Login" /></p>
+            <p><input id="loginbtn" type='submit' value="Login" /></p>
           </div>
+          <div><p>Don't have an account? <Link id="link" to="/signup">Signup here</Link></p>
+</div>
         </form>
       </div>
+    </div>
     </div>
   );
 }

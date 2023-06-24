@@ -1,25 +1,27 @@
-
+#loginpage{background-image: url(https://wallpaperaccess.com/full/449895.jpg);
+background-repeat: no-repeat;height: 100vh;}
 .login
 {
     display:flex;
-    /* margin: 10px 20px 0 0; */
     padding:15px;
     position: sticky;
     justify-content: space-between;
-    align-items: center;;
-    /* background-color: pink; */
-    /* border: 1px solid #ccc; */
+    align-items: center;
 }
 #center {text-align: center;}
-#logo img
-{
-    width:50px;
-}
+#logo img{width:50px;}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+  }  
 .login a 
 {
     margin-left: 12px;
     font-size: large;
-    padding: 5px 10px;
+    padding: 10px 15px;
+    border-radius: 25px;
     background-color: #005696;
     border-radius: 7\5px;
     color :white !important;
@@ -29,30 +31,23 @@
 
 #loginform
 {
-    /* border: 2px solid black; */
-    width:50%;
+    box-shadow: 1px 1px 3px blue;
+    border-radius: 25px;
+    width:fit-content;
+    padding:50px;
     margin:auto;
-    margin-top: 15%;
-
 }
-#loginform h2{
-    text-align: center;
-    font-weight: 700;
-}
+#loginf td>input{border-color:#cccccc94;background: transparent;outline-color: blue;}
+#loginform h2{text-align: center;font-weight: 700;}
+#loginbtn{padding:10px 15px; border-radius: 50px; background-color: #33008b;color: white;}
 #loginf {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-#loginf tr,#loginf td
-{
-    padding: 10px;
-}
-table
-{
-    margin: 30px 0 !important;
-}
+#loginf tr,#loginf td{padding: 10px;}
+table{margin: 30px 0 !important;}
 .home{
     /* background: rgb(2,0,36);
     background: linear-gradient(39deg, rgba(2,0,36,1) 0%, rgba(0,86,150,1) 49%, rgba(0,212,255,1) 100%); */
@@ -84,10 +79,8 @@ table
     font-weight: 600;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 20px;
-    /* border: 1px solid black; */
     margin: auto !important;
 }
-
 .home p
 {
     margin-left:60px;
@@ -95,3 +88,4 @@ table
     font-size: 20px;
     text-align: center;
 }
+#link{color:blue;font-weight: 600;text-decoration: underline !important;}

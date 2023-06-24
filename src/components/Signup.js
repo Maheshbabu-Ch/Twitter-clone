@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import "./Style.css"
 import Nav from "./Navigation"
@@ -11,11 +11,13 @@ export default function Signup() {
   }
   const submitHandler = (e) => {
       e.preventDefault();
-      axios.post(`http://localhost:5000/api/auth/register`, register).then(res => { alert(res.data); navigate('/login') }).catch(err => alert(err.response.data));
+      axios.post(`https://backend-tweetify.onrender.com/api/auth/register`, register).then(res => { alert(res.data); navigate('/login') }).catch(err => alert(err.response.data));
   }
 
   return (
-    <div><Nav/>
+    <div id="loginpage">
+    <Nav/>
+    <div className="container">
     <div id='loginform'> 
     <h2>Sign-up</h2>
       <form id='loginf' onSubmit={submitHandler}>
@@ -38,10 +40,13 @@ export default function Signup() {
           </tr>
         </table>
         <div>
-          <p><input type='submit' value="Signup"/></p>
-        </div>
+        <p><input id="loginbtn" type='submit' value="Signup" /></p>
+          </div>
+          <div><p>Have an account already? <Link id="link" to="/login">Log in</Link></p></div>
       </form>
       </div>
+      </div>
     </div>
+    
   )
 }

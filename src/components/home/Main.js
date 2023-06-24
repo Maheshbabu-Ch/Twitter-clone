@@ -58,7 +58,7 @@ import { Navigate } from 'react-router-dom';
 export default function Main() {
   
   return (
-    <div>
+    <div id="main">
     {localStorage.getItem('token')?
     <div className='homep'>
       <Navleft/>

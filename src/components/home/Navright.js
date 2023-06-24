@@ -9,12 +9,12 @@ export default function Navright() {
       <div id="search">
       <FontAwesomeIcon id='i' icon={faMagnifyingGlass} />
       {/* <input type='search' placeholder="Search Tweetify"></input> */}
-      <input type="search" name="search" placeholder="Search Twitter"/>
+      <input type="search" name="search" placeholder="Search Twitter" title='We are currently working on this'/>
       </div>
       <div id="tagbox">
           <h2>What's happening</h2>
           <p>#MArvel</p>
-          <p>#NAruto</p>
+          <p>#Naruto</p>
           <p>#Adipurush</p>
           <p>#Codegnan</p>
       </div>
