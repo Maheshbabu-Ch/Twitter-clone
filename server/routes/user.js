@@ -6,8 +6,9 @@ const { Tweet } = require("../model/TweetSchema");
 const getUser = async (req, res, next) => {
     try{
         const user = await User.findById(req.params.id);
-        if(!user) { return res.status(404).json("Invalid ID") }
-        res.status(200).json(user);
+        if(!user) { return res.status(409).json("Invalid ID") }
+        const {password , ...info} = user._doc;
+        res.status(200).json(info);
         } catch(err){next(err);} }
 
 const update =  async (req, res, next) => {

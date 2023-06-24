@@ -1,91 +1,128 @@
-// import React from 'react'
+// import React,{ useState } from 'react'
 // import "./Style.css"
-// import { Link } from 'react-router-dom'
-
+// import Nav from "./Navigation"
+// import axios from 'axios'
+// import { useNavigate,} from 'react-router-dom'
 
 // export default function Login() {
-//   return (
-//     <div className='login'>
-//         <Link to="/login1">Login</Link>
-//         <a>Signup</a>
+
+//     const navigate = useNavigate();
+//     const [error, setError ]= useState('')
+//     const [login, setLogin] = useState({ email: '', password: '' });
+//     const changeHandler = (e) => {
+//         setLogin({ ...login, [e.target.name]: e.target.value }) ;}
+//     const submitHandler = (e) => {
+//         e.preventDefault();
+//         axios.post('http://localhost:5000/api/auth/login', login)
+//             .then(res => {
+//             console.log(res.data);
+//             localStorage.setItem('token', res.data.token);
+//             localStorage.setItem('username', res.data.info.username)
+//             localStorage.setItem('email', res.data.info.email)
+//             localStorage.setItem('name', res.data.info.name)
+//             localStorage.setItem('userID',res.data.info._id)
+//             localStorage.setItem('pic',res.data.info.pic)
+//             const currentUser = res.data.info;
+//             console.log("currentUser: ",currentUser)
+//             navigate("/home");})
+//         .catch(err => {setError("Invalid username or password")})
+//     }
+        
+
+//     return (
+//         <div>
+//             <Nav/>
+//         <div id='loginform'> 
+//         <h2>Sign-In</h2>
+//         {error && <p id="center">{error}</p>}
+//         <form id='loginf' onSubmit={submitHandler}>
+//             <table>
+//             <tbody>
+//             <tr>
+//                 <td>Email</td>
+//                 <td><input name="email" type='text' placeholder='Enter your Email' onChange={changeHandler} required autoComplete='off'/></td>
+//             </tr>
+//             <tr>
+//                 <td>Password</td>
+//                 <td><input name="password" type='password' placeholder='Enter your Password' onChange={changeHandler} required/></td>
+//             </tr></tbody>
+//             </table>
+//             <div>
+//             <p><input type='submit' value="Login"/></p>
+//             </div>
+//       </form>
+//     </div>
 //     </div>
 //   )
 // }
 
-
-
-
-
-// const submitHandler = (e) => {
-//     e.preventDefault();
-//     // axios.post('http://localhost:5000/api/auth/login', login).then(res => { localStorage.setItem('token', res.data.token); const a= res.data; navigate('/home',{state: { a }}) }).catch(err => alert(err.response.data));
-//     axios.post('http://localhost:5000/api/auth/login', login)
-//     .then(res => { 
-//       localStorage.setItem('token', res.data.token); 
-//       axios.get('http://localhost:5000/api/user/')
-//       .then(response => { const curruser = response.data.find(user => user.email === response.data.email);
-//       navigate('/home',{state: { curruser }});
-//      })
-//      .catch(error => {
-//       console.log(error);
-//     });
-// })
-// .catch(err => alert(err.response.data));
-// };
-import React,{ useState } from 'react'
-import "./Style.css"
-import Nav from "./Navigation"
-import axios from 'axios'
-import { useNavigate,Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import "./Style.css";
+import Nav from "./Navigation";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
-  // const [email, setEmail] = useState("")
-  // const [password, setPassword] = useState("")
-    const navigate = useNavigate();
-    const [login, setlogin] = useState({ email: '', password: '' });
-    const changeHandler = (e) => {
-        setlogin({ ...login, [e.target.name]: e.target.value }) ;}
-    const submitHandler = (e) => {
-        e.preventDefault();
-        axios.post('http://localhost:5000/api/auth/login', login)
-        .then(res => {
-        console.log(res.data);
-        localStorage.setItem('token', res.data.token);
-        const currentUser = res.data.info;
-        navigate("/home",{state : {currentUser}})
-        // axios.get('http://localhost:5000/api/user')
-        //     .then(response => {
-        //     const currentUser = response.data.find(user => user.name === res.data.name); // Find the user with matching name
-        //     navigate('/home', { state: { currentUser } }); // Pass the currentUser to the homepage
-        //     })
-        //     .catch(error => {
-        //     console.log(error);
-        //     }); })
-        // .catch(err => alert(err.response.data));
-        });}
+  const navigate = useNavigate();
+  const [error, setError] = useState('');
+  const [login, setLogin] = useState({ email: '', password: '' });
+  localStorage.clear();
+  const changeHandler = (e) => {
+    setLogin({ ...login, [e.target.name]: e.target.value });
+  };
 
-    return (
-        <div>
-            <Nav/>
-        <div id='loginform'> 
+  const submitHandler = (e) => {
+    e.preventDefault();
+    axios.post('http://localhost:5000/api/auth/login', login)
+      .then(res => {
+        // console.log(res.data);
+        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('username', res.data.info.username);
+        localStorage.setItem('email', res.data.info.email);
+        localStorage.setItem('name', res.data.info.name);
+        localStorage.setItem('userID', res.data.info._id);
+        localStorage.setItem('pic', res.data.info.pic);
+        navigate("/home");
+      })
+      .catch(err => {
+        setError("Invalid username or password");
+      });
+  };
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      localStorage.clear();
+      navigate("/login");
+    }, 60000); // 1 minute in milliseconds
+
+    return () => clearTimeout(timeout);
+  }, [navigate]);
+
+
+  return (
+    <div>
+      <Nav />
+      <div id='loginform'>
         <h2>Sign-In</h2>
+        {error && <p id="center">{error}</p>}
         <form id='loginf' onSubmit={submitHandler}>
-            <table>
-            <tr>
+          <table>
+            <tbody>
+              <tr>
                 <td>Email</td>
-                <td><input name="email" type='text' placeholder='Enter your Email' onChange={changeHandler} required autoComplete='off'/></td>
-            </tr>
-            <tr>
+                <td><input name="email" type='text' placeholder='Enter your Email' onChange={changeHandler} required autoComplete='off' /></td>
+              </tr>
+              <tr>
                 <td>Password</td>
-                <td><input name="password" type='password' placeholder='Enter your Password' onChange={changeHandler} required/></td>
-            </tr>
-            </table>
-            <div>
-            <p><input type='submit' value="Login"/></p>
-                {/* <button onClick={Logcheck}>Login</button> */}
-            </div>
-      </form>
+                <td><input name="password" type='password' placeholder='Enter your Password' onChange={changeHandler} required /></td>
+              </tr>
+            </tbody>
+          </table>
+          <div>
+            <p><input type='submit' value="Login" /></p>
+          </div>
+        </form>
+      </div>
     </div>
-    </div>
-  )
+  );
 }

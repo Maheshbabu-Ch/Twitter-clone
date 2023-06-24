@@ -53,18 +53,18 @@ import React from 'react'
 import Navleft from './Navleft'
 import Navmid from './Navmid'
 import Navright from './Navright'
-import { useLocation } from 'react-router-dom'
+import { Navigate } from 'react-router-dom';
 
 export default function Main() {
-  const loc =useLocation()
-  const temp = loc.state;
-  console.log(temp)
+  
   return (
+    <div>
+    {localStorage.getItem('token')?
     <div className='homep'>
       <Navleft/>
-      <Navmid info={temp}/>
-      {/* <Navmid /> */}
+      {/* <Navmid info={temp}/> */}
+      <Navmid />
       <Navright/>
-    </div>
+    </div> : <Navigate to="/login"/> }</div>
   )
 }

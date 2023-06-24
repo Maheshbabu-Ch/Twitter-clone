@@ -52,12 +52,16 @@ const getmytweets = async (req,res,next) => {
             return res.status(200).json(tweets)
     }catch(err){ next(err);}
 }
-
+// const gettweet = async(req,res)=>{
+//     const tweet = await Tweet.findById(req.params.id)
+//     return res .status(200).json(tweet)
+// }
+// router.get("/:id",gettweet)
 //create a new tweet
 router.post("/", authtoken, createtweet)
 
 router.get('/ret', async(req, res) => {
-    return res.status(200).json(await Tweet.find());
+    return res.status(200).json(await Tweet.find().sort({ createdAt: -1}));
 });
 //delete a tweet
 router.delete("/:id", authtoken, deletetweet)

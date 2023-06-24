@@ -7,7 +7,8 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true },
     followers: { type: Array, defaultValue : []},
     following: {type:Array, defaultValue: []},
-    bio : { type: String}
+    bio : { type: String},
+    pic : { type:String, default: "https://img.icons8.com/?size=512&id=tZuAOUGm9AuS&format=png"}
 }, {
     timestamps: true,
 });

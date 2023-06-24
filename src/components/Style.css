@@ -9,8 +9,8 @@
     align-items: center;;
     /* background-color: pink; */
     /* border: 1px solid #ccc; */
-
 }
+#center {text-align: center;}
 #logo img
 {
     width:50px;

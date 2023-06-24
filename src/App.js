@@ -30,11 +30,16 @@ import About from './components/About'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Profile from './components/home/Profile'
-import Navigation from './components/Navigation'
+import Error from './components/Error'
 class App extends React.Component 
 {
  // state = { Name: "Ram" , Age:19}
   state = { isloggedIn: true}
+  componentDidMount() {
+    if (this.state.isloggedIn) {
+      this.setState({ isloggedIn: false });
+    }
+  }
   render()
   {
     // return ( <body><div>
@@ -50,13 +55,16 @@ class App extends React.Component
         <BrowserRouter>
         {/* <Navigation/> */}
           <Routes>
-            <Route path="/" element= {this.state.isloggedIn ? <><Navigate to = "/login" replace/> {this.setState({isloggedIn:false})} </>: <Main/>} />
+            {/* <Route path="/" element= {this.state.isloggedIn ? <><Navigate to = "/login" replace/> {this.setState({isloggedIn:false})} </>: <Main/>} /> */}
+            <Route path="/" element = {this.state.isloggedIn ? (<><Navigate to = "/login" replace/></>):(<Main/>)} />
             <Route path="/home" element = {<Main/>} />
             <Route path="/profile/:id" element = {<Profile/>} />
             <Route path="/about" element= {<About/>}/>
             <Route path="/contact" element= {<Contact/>}/>
             <Route path="/login" element= {<Login/>}/>
             <Route path="/signup" element= {<Signup/>}/>
+            <Route path="/error" element= {<Error/>}/>
+            <Route path="*" element= {<Navigate to="/error" replace/>}/>
           </Routes>
         </BrowserRouter>
       </section>

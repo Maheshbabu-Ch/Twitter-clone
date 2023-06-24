@@ -17,9 +17,10 @@ app.use(cors({
 }));
 
 //connect mongobd
-mongoose.connect('mongodb+srv://mahesh:mahesh12@cluster0.9g80yjd.mongodb.net/firstdb?retryWrites=true&w=majority').then(
+mongoose.connect('mongodb+srv://mahesh:mahesh12@cluster0.9g80yjd.mongodb.net/firstdb?retryWrites=true&w=majority')
+.then(
     console.log("Db is connected")
-);
+)
 
 //auth api's
 app.use('/api/auth', auth);
