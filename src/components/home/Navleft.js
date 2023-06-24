@@ -1,5 +1,7 @@
 import React from 'react'
 import logo from "../../logo1.png"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./Home.css"
 import { Link } from 'react-router-dom'
 
@@ -8,8 +10,18 @@ export default function Navleft() {
     function logouthandler()
     {
         sessionStorage.clear();
-        window.location = "/"
-        alert("logged out")
+        toast.success('Logged out!', {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+        setTimeout(() => {
+            window.location = "/";
+          }, 3000);
     }
 
   return (
@@ -55,8 +67,10 @@ export default function Navleft() {
                     <p>{sessionStorage.getItem('username')}</p>
                     {/* {username}</p> */}
                     </div>
+                    
                     </div>
-                    <Link id="logout" to="/login" onClick={logouthandler}>Logout</Link>
+                    <Link id="logout" to="" onClick={logouthandler}>Logout</Link>
+                    <ToastContainer/>
                 </div>
     </div>
   )

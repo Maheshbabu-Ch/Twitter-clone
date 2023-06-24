@@ -1,5 +1,7 @@
 import React,{useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 import "./Style.css"
 import Nav from "./Navigation"
@@ -12,7 +14,21 @@ export default function Signup() {
   const submitHandler = (e) => {
       e.preventDefault();
       
-      axios.post(`https://backend-tweetify.onrender.com/api/auth/register`, register).then(res => { alert(res.data); navigate('/login') }).catch(err => alert(err.response.data));
+      axios.post(`https://backend-tweetify.onrender.com/api/auth/register`, register)
+      .then(res => { 
+        toast.success(`${res.data}`, {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+      });
+      setTimeout(() => {
+        navigate('/login')
+      }, 5000);
+       }).catch(err => alert(err.response.data));
   }
 
   return (
@@ -20,7 +36,7 @@ export default function Signup() {
     <Nav/>
     <div className="container">
     <div id='loginform'> 
-    <h2>Sign-up</h2>
+      <h2>Sign-up</h2>
       <form id='loginf' onSubmit={submitHandler}>
         <table>
             <tr>
@@ -46,6 +62,7 @@ export default function Signup() {
           <div><p>Have an account already? <Link id="link" to="/login">Log in</Link></p></div>
       </form>
       </div>
+      <ToastContainer />
       </div>
     </div>
     

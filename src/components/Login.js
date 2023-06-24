@@ -61,6 +61,8 @@ import "./Style.css";
 import Nav from "./Navigation";
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import { type } from '@testing-library/user-event/dist/type';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -87,7 +89,16 @@ export default function Login() {
         navigate("/home");
       })
       .catch(err => {
-        setError("Invalid username or password");
+        toast.error("Invalid Username or Password", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'dark',
+      });
       });
   };
 
@@ -107,7 +118,7 @@ export default function Login() {
       <div className="container">
       <div id='loginform'>
         <h2>Sign-In</h2>
-        {error && <p id="center">{error}</p>}
+        {/* {error && <p id="center">{error}</p>} */}
         <form id='loginf' onSubmit={submitHandler}>
           <table>
             <tbody>
@@ -124,6 +135,7 @@ export default function Login() {
           <div>
             <p><input id="loginbtn" type='submit' value="Login" /></p>
           </div>
+          <ToastContainer limit={1}/>
           <div><p>Don't have an account? <Link id="link" to="/signup">Signup here</Link></p>
 </div>
         </form>

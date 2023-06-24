@@ -287,6 +287,6 @@ a{ text-decoration: none !important; color:black ;}
 #profile_pic1{height:160px;}
 /* position: relative;top: -80px;left: 20px;} */
 .follow{padding:10px 30px;margin:auto;border-radius: 25px;}
-.follow.del{background-color: red; color: white;font-weight: 700;margin-right: 10px;}
+.follow.del{background-color: red; color: white;font-weight: 700;margin-right: 10px;cursor:pointer}
 .center{text-align: center;margin: auto;margin-top:40vh;font-size: 25px;}
 .center #logout{padding:15px 30px;border-radius: 50px;margin-top: 40px;}

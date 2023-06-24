@@ -3,6 +3,8 @@ import Navleft from './Navleft'
 import Navright from './Navright'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {formatDistanceToNow} from 'date-fns'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart,faTrash } from '@fortawesome/fontawesome-free-solid';
@@ -155,19 +157,33 @@ export default function Profile() {
           };
           
           const deletehandler = async() => {
+            const confirmed = window.confirm('Are you sure you want to delete your account? This action cannot be undone.');
+            if(confirmed){
             try{
-                  await axios.delete(`https://backend-tweetify.onrender.com/api/user/${sessionStorage.getItem('userID')}`,{
-                    headers: {
-                      'x-token': sessionStorage.getItem('token'),
-                    },
-                  });
-                  alert('Your Account has been deleted successfully');
+                  // await axios.delete(`https://backend-tweetify.onrender.com/api/user/${sessionStorage.getItem('userID')}`,{
+                  //   headers: {
+                  //     'x-token': sessionStorage.getItem('token'),
+                  //   },
+                  // });
+                  // alert('Your Account has been deleted successfully');
+                  toast("❌ Account Deleted Successfully", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+                setTimeout(() => {
+                  navigate('/login')
+                }, 3000);
                   sessionStorage.clear();
-                  navigate('/')
-
-            }catch (error) {
-              console.log(error);
+                
             }
+          catch (error) {
+              console.log(error);
+            }}
           }
 
 useEffect(()=> {getTweets()},[id,tweets,user])
@@ -197,6 +213,7 @@ useEffect(()=> {getTweets()},[id,tweets,user])
                     <div>
                         {tweets}
                     </div>
+                    <ToastContainer />
         </div>)}
         <Navright/>
     </div>

@@ -20,7 +20,7 @@ router.post("/register", async (req, res) => {
             password,
         });
         await newUser.save();
-        return res.json("user account created sucessfully");
+        return res.json("Account Created");
     }
 });
 

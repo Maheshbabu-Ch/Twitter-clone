@@ -1,11 +1,21 @@
 import React,{ useEffect, useState} from 'react'
 import axios from 'axios';
 import Tweet from './Tweet';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function Navmid(){
   const [tweets, setTweets] = useState([])
-
   useEffect(()=>{getTweets();},[])
   const post_tweet = async () => {
+    const id  = toast.loading("Posting...", {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+  });
     const tweetText = document.getElementById("tweet_content").innerText;
     const tweetButton = document.getElementById("tweet");
     document.getElementById("tweet_content").innerText = "";
@@ -21,6 +31,7 @@ export default function Navmid(){
         }
       });
       getTweets();
+      toast.update(id, {render: "Tweet Posted",type: "success", isLoading: false, autoClose:2000})
     } catch (error) {
       console.error(error);
     } finally {
@@ -85,10 +96,13 @@ const getTweets = async () => {
                 <button id="tweet" onClick={post_tweet}>Tweet</button>
                 </div>
             </form>
+            <div>
+    </div>
             <div id="posts">
                   {tweets}
               </div>
           </div>
+          <ToastContainer />
       </div>
   )
 }
