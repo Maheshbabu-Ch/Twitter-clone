@@ -89,7 +89,7 @@ export default function Login() {
         navigate("/home");
       })
       .catch(err => {
-        toast.error("Invalid Username or Password", {
+        toast.error("Invalid Email or Password", {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 3000,
           hideProgressBar: true,
